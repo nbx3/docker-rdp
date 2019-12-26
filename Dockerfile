@@ -11,6 +11,7 @@ RUN dnf update -y && \
 	    tint2 \
 	    procps-ng \
 	    dbus-daemon \
+	    dbus-x11 \
 	    supervisor \
 	    git \
 	    vim-enhanced && \
