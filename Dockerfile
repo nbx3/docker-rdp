@@ -1,26 +1,24 @@
-FROM ubuntu:disco
+FROM fedora:latest
 MAINTAINER nick@incension.com
 
-ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update && \
-    apt-get install -y \
-    	xrdp \
-	openbox \
-	obconf \
-	obmenu \
-	openbox-menu \
-	dunst \
-	xinput \
-	tint2 \
-	supervisor \
-	git \
-	vim && \
-    apt-get clean
+RUN dnf update -y && \
+    dnf -y install \
+	   xrdp \
+	    openbox \
+	    obconf \
+	    dunst \
+	    xinput \
+	    tint2 \
+	    procps-ng \
+	    supervisor \
+	    git \
+	    vim-enhanced && \
+    dnf clean all
 
 ADD supervisor.conf /etc/supervisor/conf.d/xrdp.conf
 ADD config/ /etc/skel/
 
-RUN useradd -mp j9X2HRQvPCphA -s /bin/bash -G sudo nick
+RUN useradd -mp j9X2HRQvPCphA -s /bin/bash -G wheel nick
 
 RUN xrdp-keygen xrdp auto
 
