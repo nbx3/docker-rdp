@@ -13,16 +13,21 @@ RUN apt-get update && \
 	xinput \
 	tint2 \
 	supervisor \
+	dbus-x11 \
+	dbus-user-session \
 	git \
 	vim && \
     apt-get clean
 
 ADD supervisor.conf /etc/supervisor/conf.d/xrdp.conf
-ADD config/ /etc/skel/
+ADD skel-config/ /etc/skel/
+ADD config/locale /etc/default/
 
 RUN useradd -mp j9X2HRQvPCphA -s /bin/bash -G sudo nick
 
-RUN xrdp-keygen xrdp auto
+RUN xrdp-keygen xrdp auto && \
+    mkdir -p /var/run/dbus
+   
 
 CMD ["supervisord", "-n"]
 
