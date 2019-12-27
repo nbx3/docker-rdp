@@ -16,6 +16,9 @@ RUN apt-get update && \
 	dbus-x11 \
 	dbus-user-session \
 	git \
+	curl \
+	sudo \
+	iputils-ping \
 	vim && \
     apt-get clean
 
